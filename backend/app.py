@@ -24,6 +24,10 @@ df_full = pd.read_csv(csv_path)
 for _col in ['Income', 'LoanAmount', 'CreditScore', 'Default']:
     if _col in df_full.columns:
         df_full[_col] = pd.to_numeric(df_full[_col], errors='coerce')
+@app.route('/', methods=['GET'])
+@app.route('/health', methods=['GET'])
+def health_check():
+    return jsonify({'status': 'healthy', 'service': 'Credify API'}), 200
 
 @app.route('/api/insights', methods=['GET'])
 def get_insights():
