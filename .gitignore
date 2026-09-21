@@ -43,5 +43,6 @@ build/
 # Large datasets / Ignore processed
 Loan_default_processed.csv
 
-# macOS
+# IDE / Tools
+.claude/
 .DS_Store
