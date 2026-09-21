@@ -1,0 +1,144 @@
+{
+    "fill_values": {
+        "Age": 43.0,
+        "Income": 82466.0,
+        "LoanAmount": 127556.0,
+        "CreditScore": 574.0,
+        "MonthsEmployed": 60.0,
+        "NumCreditLines": 2.0,
+        "InterestRate": 13.46,
+        "LoanTerm": 36.0,
+        "DTIRatio": 0.5,
+        "Education": "Bachelor's",
+        "EmploymentType": "Part-time",
+        "MaritalStatus": "Married",
+        "HasMortgage": "Yes",
+        "HasDependents": "Yes",
+        "LoanPurpose": "Business",
+        "HasCoSigner": "Yes"
+    },
+    "clip_values": {
+        "Age": {
+            "lower": -6.5,
+            "upper": 93.5
+        },
+        "Income": {
+            "lower": -52264.75,
+            "upper": 217309.25
+        },
+        "LoanAmount": {
+            "lower": -118087.5,
+            "upper": 373228.5
+        },
+        "CreditScore": {
+            "lower": 24.5,
+            "upper": 1124.5
+        },
+        "MonthsEmployed": {
+            "lower": -60.0,
+            "upper": 180.0
+        },
+        "NumCreditLines": {
+            "lower": 0.5,
+            "upper": 4.5
+        },
+        "InterestRate": {
+            "lower": -9.45,
+            "upper": 36.47
+        },
+        "LoanTerm": {
+            "lower": -12.0,
+            "upper": 84.0
+        },
+        "DTIRatio": {
+            "lower": -0.3,
+            "upper": 1.2999999999999998
+        }
+    },
+    "scaler_stats": {
+        "Age": {
+            "mean": 43.498306226429136,
+            "std": 14.990258418709587
+        },
+        "Income": {
+            "mean": 82499.30459727351,
+            "std": 38963.013729378144
+        },
+        "LoanAmount": {
+            "mean": 127578.86551242035,
+            "std": 70840.70614150059
+        },
+        "CreditScore": {
+            "mean": 574.2643461642392,
+            "std": 158.9038665949753
+        },
+        "MonthsEmployed": {
+            "mean": 59.541976212761455,
+            "std": 34.64337563735206
+        },
+        "NumCreditLines": {
+            "mean": 2.501035845339871,
+            "std": 1.1170176714339635
+        },
+        "InterestRate": {
+            "mean": 13.492773480792803,
+            "std": 6.636443064944322
+        },
+        "LoanTerm": {
+            "mean": 36.02589417537703,
+            "std": 16.969330034462832
+        },
+        "DTIRatio": {
+            "mean": 0.5002120643673119,
+            "std": 0.23091661543575948
+        }
+    },
+    "expected_features": [
+        "Age",
+        "Income",
+        "LoanAmount",
+        "CreditScore",
+        "MonthsEmployed",
+        "NumCreditLines",
+        "InterestRate",
+        "LoanTerm",
+        "DTIRatio",
+        "HasMortgage",
+        "HasDependents",
+        "HasCoSigner",
+        "Education_High School",
+        "Education_Master's",
+        "Education_PhD",
+        "EmploymentType_Part-time",
+        "EmploymentType_Self-employed",
+        "EmploymentType_Unemployed",
+        "MaritalStatus_Married",
+        "MaritalStatus_Single",
+        "LoanPurpose_Business",
+        "LoanPurpose_Education",
+        "LoanPurpose_Home",
+        "LoanPurpose_Other"
+    ],
+    "binary_cols": [
+        "HasMortgage",
+        "HasDependents",
+        "HasCoSigner"
+    ],
+    "multi_cols": [
+        "Education",
+        "EmploymentType",
+        "MaritalStatus",
+        "LoanPurpose"
+    ],
+    "scale_cols": [
+        "Age",
+        "Income",
+        "LoanAmount",
+        "CreditScore",
+        "MonthsEmployed",
+        "NumCreditLines",
+        "InterestRate",
+        "LoanTerm",
+        "DTIRatio"
+    ]
+}

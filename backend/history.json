@@ -1,0 +1,54 @@
+[
+    {
+        "timestamp": "2026-08-12 10:34:19",
+        "inputs": {
+            "age": "35",
+            "income": "65000",
+            "amount": "25000",
+            "education": "Bachelor's",
+            "employment": "Full-time",
+            "rate": "10.50",
+            "marital_status": "Married",
+            "months_employed": "36",
+            "duration": "36",
+            "dependents": "No",
+            "score": "680",
+            "purpose": "Auto",
+            "credit_lines": "3",
+            "mortgage": "No",
+            "dti": "0.35",
+            "cosigner": "No"
+        },
+        "prediction": {
+            "risk": "low",
+            "confidence": "48.6%",
+            "message": "Applicant is likely to repay"
+        }
+    },
+    {
+        "timestamp": "2026-09-16 10:14:11",
+        "inputs": {
+            "age": "35",
+            "amount": "25000",
+            "cosigner": "No",
+            "credit_lines": "3",
+            "dependents": "No",
+            "dti": "0.35",
+            "duration": "36",
+            "education": "Bachelor's",
+            "employment": "Full-time",
+            "income": "65000",
+            "marital_status": "Married",
+            "months_employed": "36",
+            "mortgage": "No",
+            "purpose": "Auto",
+            "rate": "10.50",
+            "score": "680"
+        },
+        "prediction": {
+            "risk": "low",
+            "confidence": "48.6%",
+            "message": "Applicant is likely to repay"
+        }
+    }
+]

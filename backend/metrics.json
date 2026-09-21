@@ -1,0 +1,23 @@
+{
+    "algorithm": "Logistic Regression",
+    "accuracy": 67.7,
+    "f1_score": 0.33,
+    "feature_importance": [
+        {
+            "feature": "Age",
+            "importance": 12.2
+        },
+        {
+            "feature": "InterestRate",
+            "importance": 9.5
+        },
+        {
+            "feature": "EmploymentType_Unemployed",
+            "importance": 9.0
+        },
+        {
+            "feature": "MonthsEmployed",
+            "importance": 7.0
+        }
+    ]
+}

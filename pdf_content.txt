@@ -1,0 +1,238 @@
+﻿--- Page 1 ---
+Standard Opera+ng Procedure (SOP)
+Computer Engineering Department
+ML Project
+Standard Opera+ng Procedure (SOP) for Student Project
+Alloca+on, Execu+on & Monitoring
+1. Purpose
+This SOP defines a structured, data-driven, and outcome-oriented process for alloca;ng, execu;ng,
+monitoring, and evalua;ng Machine Learning (ML) in the Computer Engineering Department. The
+objec;ve is to ensure algorithmic understanding, rigorous experimenta;on, regular progress
+tracking, and fair evalua;on across semesters.
+2. Scope
+This SOP applies to:
+ΓÇó All undergraduate Computer Engineering students
+ΓÇó All faculty members involved in project mentoring and evalua;on
+ΓÇó All project-based courses focusing on ML and DL from the 3rd semester onwards
+3. Project Models
+3.1 Common Project Model (Phase 1: Weeks 1-10)
+Objec;ve:
+ΓÇó Build a strong founda;on in the ML pipeline (Data ΓåÆ Model ΓåÆ Deployment)
+ΓÇó Ensure uniform learning outcomes regarding standard algorithms and metrics.
+ΓÇó Enable easier mentoring, monitoring, and benchmarking
+Procedure:
+1. The department shall define common project problem statement for all students.
+2. 5 Problem Statement is given to student.
+3. Students must work individually as per course policy, but:
+ΓÇó Dataset Source
+ΓÇó Target Variables
+ΓÇó Func;onal requirements shall remain common for all.
+4. Mandatory Constraint: Implementa;on of at least one algorithm without the use of a library
+(scratch implementa;on).
+Expected Outcomes:
+ΓÇó Clear understanding of Data Pre-processing, Feature Engineering, and EDA.
+ΓÇó Hands-on experience with Model Training, Valida;on, and Hyperparameter Tuning.
+1 | Page
+--- Page 2 ---
+Standard Opera+ng Procedure (SOP)
+Computer Engineering Department
+ML Project
+ΓÇó Development of a Flask-based Web Interface for predic;on.
+Use any one dataset from following list:
+1) Cardiovascular Disease Dataset (Healthcare) -
+hVps://www.kaggle.com/datasets/sulianova/cardiovascular-disease-dataset
+2) Bank Marke;ng Campaign (Marke;ng) -
+hVps://archive.ics.uci.edu/dataset/222/bank+marke;ng
+3) Vehicle Insurance fraud data ΓÇô
+hVps://support.minitab.com/en-us/datasets/ge[ng-started-guide-data-sets/insurance-
+fraud-data/
+4) Loan Default Predic;on (Banking)
+hVps://www.kaggle.com/datasets/nikhil1e9/loan-default
+5) Stock market Price predic;on
+Use any free API to get data.
+3.2 Deep Learning Project Model (Phase 2: Weeks 11-14)
+Objec;ve:
+ΓÇó Promote independent problem-solving in the Deep Learning domain.
+ΓÇó Encourage crea;vity, ownership, and explora;on of unstructured data
+ΓÇó Prepare students for internships and industry projects
+Procedure:
+1. Each student shall select or propose an individual project ;tle.
+2. Project proposals must focus on unstructured data.
+3. Recommended Technology Stack: PyTorch,
+4. Minimum technical expecta;ons include Custom Architecture Design (CNN/RNN)
+5. Use Following dataset for ML task:
+Use any one dataset from following list:
+1) Face Mask Detector
+-hVps://www.kaggle.com/datasets/andrewmvd/face-mask-detec;on/data
+2 | Page
+--- Page 3 ---
+Standard Opera+ng Procedure (SOP)
+Computer Engineering Department
+ML Project
+2) Traffic Sign Recogni;on
+hVps://idd.insaan.iiit.ac.in/dataset/details/
+3) Vehicle Log System (License Plate Recogni;on)ΓÇô
+hVps://www.kaggle.com/datasets/saisirishan/indian-vehicle-dataset
+Expected Outcomes:
+ΓÇó Improved analy;cal and design skills regarding Neural Networks.
+ΓÇó Confidence in handling real-world problems and projects.
+4. Project Planning & Weekly Execu?on
+4.1 Week-wise Planning
+At the start of the semester, a week-wise project plan with project document shall be shared
+with students.
+Title
+Week No. Task List
+Problem Defini.on and Problem statement, dataset summary, and
+1
+Dataset Explora.on ini.al observa.ons.
+Data Cleaning and Pre- Handle missing values
+processing Iden.fy and handle outliers.
+2
+Encode categorical variables Normalize/scale
+numerical features.EDA
+Model Crea.on Find out appropriate algorithm for training for
+your dataset. Use Library for project also
+3
+Implement selected Algorithm without use of
+Library.
+Model Evalua.on Test the model on the test dataset and compute
+4
+metrics.Check for overfiRng or underfiRng.
+Advanced Model Training Experiment with advanced models
+cross-valida.on to ensure model stability.
+5
+Compare models based on valida.on metrics.
+Hyperparameter Tuning
+Visualiza.on of metrics and Display all types of graph associated with
+6
+graph performance metrics
+3 | Page
+--- Page 4 ---
+Standard Opera+ng Procedure (SOP)
+Computer Engineering Department
+ML Project
+7 Flask Project Setup Learn How to setup project on Flask
+Create simple flask applica.on which use form .
+8 Create Front end Create front end of your project. Generally for
+user to input data
+9 Create backend, Deployment Setup backend to handle user request , Final
+Project Deployment to available free hos.ng
+site.
+10 Project Evalua=on Project Evalua=on
+11 Find proper data for Problem statement, dataset summary, and
+CNN project ini.al observa.ons.
+12 Setup Simple CNN Do proper setup using Pytorch
+architecture
+13 Final Deployment Setup backend to handle user request , Final
+Project Deployment to available free hos.ng
+site.
+Project Evalua=on Project Evalua=on
+14
+5. Student Follow-up & Monitoring Mechanism
+5.1 Regular Follow-ups
+1. Faculty mentors shall conduct weekly project reviews. Each review shall verify:
+2. Each review shall verify:
+o Code progress
+o Database changes
+o UI/screens comple;on
+o Alignment with weekly goals
+3. Students must demonstrate:
+o Running code (not only screenshots)
+o Incremental commits or version updates
+5.2 Progress Tracking
+1. Students shall maintain:
+o Weekly progress records
+4 | Page
+--- Page 5 ---
+Standard Opera+ng Procedure (SOP)
+Computer Engineering Department
+ML Project
+o Task comple;on status
+o Delays or devia;ons must be Recorded, Communicated, and Corrected with clear
+ac;on points.
+6. Roles & Responsibili?es
+6.1 Student ResponsibiliLes
+ΓÇó Follow the defined project ;meline strictly
+ΓÇó AVend all scheduled reviews
+ΓÇó Ensure originality and academic integrity
+ΓÇó Complete deliverables within deadlines
+6.2 Faculty Mentor ResponsibiliLes
+ΓÇó Guide students technically and conceptually
+ΓÇó Conduct regular reviews and provide feedback
+ΓÇó Ensure students adhere to SOP and standards
+ΓÇó Escalate issues if progress is unsa;sfactory
+6.3 Department ResponsibiliLes
+ΓÇó Define project themes and expecta;ons
+ΓÇó Ensure uniform evalua;on criteria
+ΓÇó Review overall progress periodically
+ΓÇó Update SOP as per academic or industry needs
+7. Evalua?on Guidelines
+7.1 ConLnuous Assessment Requirement:
+ΓÇó Evalua;on must be performed itera;vely throughout the project lifecycle. All follow-up
+sessions are to be logged in the Common Tracking Sheet.
+ΓÇó For common projects (ML), compara;ve benchmarking may be applied.
+ΓÇó For individual projects (DL), complexity and completeness shall be considered.
+ΓÇó Sheet template must align as below columns:
+[Sr, Roll No, Enrolment No, Division, Batch, Student Name, Project Title (In case of common
+project this one will be opBonal), Evaluator Name(Taken By), Follow-up Date, Grade,
+Performance Remarks]
+7.2 Grade distribuLon may include:
+ΓÇó Weekly progress & reviews: 1 Mark per objec;ve.
+ΓÇó Code quality & architecture: Proper modularity and logic.
+ΓÇó Database/Dataset knowledge: Understanding of features and preprocessing.
+ΓÇó UI/UX consistency: Clean interface for predic;on.
+ΓÇó Final demonstra;on & viva.
+5 | Page
+--- Page 6 ---
+Standard Opera+ng Procedure (SOP)
+Computer Engineering Department
+ML Project
+Evalua;on Grading Criteria
+Grade Performance Level DescripIon
+Everything is perfect. The student clearly understands the
+A Very Good
+project, and their work is neat, organized, and complete.
+Great effort. They understand the main parts of the project, but
+B Good there are s;ll a few small things that need to be fixed or
+improved.
+Just doing the work to get it done. They are finishing tasks but
+C Average don't really understand how the code works or why they are
+doing it.
+Not doing the work. They are not following the project rules and
+Z Poor
+haven't shown any interest in star;ng.
+8. Compliance & Review
+ΓÇó Adherence to this SOP is mandatory for all students and faculty.
+ΓÇó Non-compliance may result in:
+o Reduced evalua;on scores
+o Rework instruc;ons
+ΓÇó This SOP shall be reviewed every semester by the department.
+EffecIve From: Academic Year 2025ΓÇô26
+Approved By:
+Prof. Rupesh G Vaishnav Dr. Gopi B Sanghani
+(Head of Department) (Dean)
+AVachment
+6 | Page
+--- Page 7 ---
+Standard Opera+ng Procedure (SOP)
+Computer Engineering Department
+ML Project
+7 | Page
+--- Page 8 ---
+Standard Opera+ng Procedure (SOP)
+Computer Engineering Department
+ML Project
+Predic=on Screen
+Model Details
+8 | Page
+--- Page 9 ---
+Standard Opera+ng Procedure (SOP)
+Computer Engineering Department
+ML Project
+EDA Details
+9 | Page
+--- Page 10 ---
+Standard Opera+ng Procedure (SOP)
+Computer Engineering Department
+ML Project
+10 | Page
