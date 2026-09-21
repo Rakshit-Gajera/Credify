@@ -81,7 +81,7 @@ export default function Home() {
             </h1>
 
             <p className="hero-lede">
-              CrediGuard turns an applicant&apos;s financial profile into a default
+              Credify turns an applicant&apos;s financial profile into a default
               probability in milliseconds — using a Logistic Regression model trained on a
               quarter of a million real loan records, served live from a Flask API.
             </p>

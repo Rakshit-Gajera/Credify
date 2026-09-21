@@ -1,4 +1,4 @@
-# CrediGuard — Frontend
+# Credify — Frontend
 
 React + Vite single-page app for the loan default prediction project. It talks to the
 Flask backend in `../backend` over REST and renders the 3D visualisations with Three.js.

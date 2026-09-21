@@ -32,7 +32,7 @@ function Footer() {
         </span>
         <div>
           <div className="brand-name" style={{ fontSize: '1rem' }}>
-            CrediGuard
+            Credify
           </div>
           <p className="footer-copy">
             Loan default prediction · Logistic Regression · Flask + React + Three.js

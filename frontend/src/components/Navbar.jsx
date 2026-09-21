@@ -66,7 +66,7 @@ export default function Navbar() {
         <NavLink to="/" className="brand">
           <span className="brand-mark"><Shield size={18} /></span>
           <span>
-            <span className="brand-name">CrediGuard</span>
+            <span className="brand-name">Credify</span>
             <span className="brand-sub">Risk Intelligence</span>
           </span>
         </NavLink>
