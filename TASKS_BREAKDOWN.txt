@@ -1,0 +1,349 @@
+================================================================================
+          CREDIFY: LOAN DEFAULT RISK PREDICTION - DETAILED TASK BREAKDOWN
+                       Machine Learning Pipeline (Task 1 to Task 6)
+================================================================================
+
+PROJECT OVERVIEW:
+- Domain: Financial Risk Intelligence / Banking
+- Dataset: Loan_default.csv (~255,347 rows, 18 columns)
+- Goal: Predict whether a loan applicant will default (binary classification)
+- Key Challenges: Severe class imbalance (~11.6% defaults), mixed data types,
+  outliers, and different feature scales.
+
+--------------------------------------------------------------------------------
+MASTER PROMPT TEMPLATE (Copy & Paste for AI or Project Documentation)
+--------------------------------------------------------------------------------
+"Act as a Senior Machine Learning Engineer and Educator. Explain the complete
+end-to-end Machine Learning pipeline for the 'Credify: Loan Default Risk Prediction'
+project across all 6 core tasks (Task 1 to Task 6).
+
+For each task from 1 to 6, explain:
+1. Task Title & Main Objective (What is the purpose of this task?)
+2. Why It Matters (Why can't we skip this step in real-world ML?)
+3. Step-by-Step Instructions (What specific actions, formulas, or code steps must be executed?)
+4. Key Tools & Algorithms Used
+5. Expected Deliverable / Outcome
+
+Dataset Context:
+- Dataset: Loan_default.csv (~255k rows, 18 columns)
+- Goal: Predict whether a borrower will default on their loan (Binary Classification: Default = 1, No Default = 0)
+- Key Challenges: Severe class imbalance (~11.6% defaults), mixed categorical and numerical data, features on vastly different scales.
+
+Tasks to cover:
+- Task 1: Problem Definition & Dataset Exploration
+- Task 2: Data Cleaning & Pre-processing
+- Task 3: Model Creation (Scikit-learn + Implementation From Scratch)
+- Task 4: Model Evaluation & Diagnosis (Underfitting vs. Overfitting)
+- Task 5: Advanced Models, Cross-Validation & Hyperparameter Tuning
+- Task 6: Visualization of Metrics & Performance Graphs
+
+Keep the tone professional, structured, detailed, yet easy for a student or beginner to understand."
+
+================================================================================
+TASK 1: PROBLEM DEFINITION & DATASET EXPLORATION
+================================================================================
+
+1. OBJECTIVE:
+   Formulate the machine learning problem, understand the dataset structure,
+   and make initial observations before writing transformation code or training models.
+
+2. WHY IT MATTERS:
+   Jumping directly into code without inspecting the dataset leads to faulty
+   assumptions, improper metrics (e.g. relying on raw accuracy during class
+   imbalance), and model failure in production.
+
+3. STEP-BY-STEP INSTRUCTIONS:
+   a. Define the ML Problem:
+      - Problem Type: Supervised Binary Classification.
+      - Target Variable: 'Default' (1 = Default / Failed to repay, 0 = Non-default).
+   b. Inspect Dataset Dimensions & Schema:
+      - Rows: 255,347 records.
+      - Columns: 18 (17 feature columns + 1 target column).
+   c. Feature Grouping:
+      - Demographic Features:
+        * Age (Integer)
+        * Education (Categorical: High School, Bachelor's, Master's, PhD)
+        * EmploymentType (Categorical: Full-time, Part-time, Self-employed, Unemployed)
+        * MaritalStatus (Categorical: Single, Married, Divorced)
+        * HasDependents (Binary: Yes / No)
+      - Financial & Credit History:
+        * Income (Float - Annual earnings in USD)
+        * CreditScore (Integer - FICO range 300 to 850)
+        * MonthsEmployed (Integer)
+        * NumCreditLines (Integer - Open credit cards/accounts)
+        * DTIRatio (Float - Debt-to-Income ratio, monthly debt / monthly income)
+        * HasMortgage (Binary: Yes / No)
+        * HasCoSigner (Binary: Yes / No)
+      - Loan Contract Details:
+        * LoanAmount (Float - Principal requested in USD)
+        * InterestRate (Float - Annual interest percentage)
+        * LoanTerm (Integer - Duration in months)
+        * LoanPurpose (Categorical: Auto, Business, Education, Home, Other)
+      - Target:
+        * Default (Target - 1 for Default, 0 for Non-Default)
+   d. Identify Critical Characteristics & Challenges:
+      - Severe Class Imbalance: ~11.6% defaults vs ~88.4% non-defaults. A naive
+        model that always outputs 0 would achieve 88.4% accuracy while catching
+        zero defaults.
+      - Scale Disparities: Income is in $100,000s, while DTIRatio ranges from 0 to 1.
+      - Mixed Types: Text categories cannot be fed directly into mathematical models.
+      - Missing Values: Some rows contain blank or NaN entries.
+
+4. DELIVERABLE:
+   A formal Data Dictionary and Exploratory Summary detailing column types,
+   cardinality, and identified challenges.
+
+
+================================================================================
+TASK 2: DATA CLEANING & PRE-PROCESSING
+================================================================================
+
+1. OBJECTIVE:
+   Transform messy, raw tabular data into a sanitized, numerical matrix ready
+   for mathematical optimization.
+
+2. WHY IT MATTERS:
+   Machine learning algorithms cannot process text labels or NaN values, and
+   unscaled features cause gradient descent and distance metrics to be dominated
+   by columns with large numerical magnitudes.
+
+3. STEP-BY-STEP INSTRUCTIONS:
+   a. Missing Value Imputation:
+      - Numerical Features (Income, CreditScore, LoanAmount, DTIRatio, Age):
+        Fill missing cells with the column MEDIAN.
+        Why Median? Unlike the mean, median is unaffected by extreme outliers.
+        Example: df['Income'] = df['Income'].fillna(df['Income'].median())
+      - Categorical Features (Education, EmploymentType, LoanPurpose):
+        Fill missing cells with the column MODE (most frequent category).
+   b. Outlier Detection & Capping (IQR Method):
+      - Calculate Interquartile Range: IQR = Q3 - Q1
+      - Define lower bound: Q1 - 1.5 * IQR
+      - Define upper bound: Q3 + 1.5 * IQR
+      - Action: Clip extreme values to these boundary limits instead of deleting
+        rows (prevents loss of valuable training data).
+        Example: df[col] = df[col].clip(lower=lower_bound, upper=upper_bound)
+   c. Categorical Variable Encoding:
+      - Binary Flags: Map Yes -> 1 and No -> 0 for columns:
+        HasMortgage, HasDependents, HasCoSigner.
+      - Multi-class Nominal Columns: Apply One-Hot Encoding using pd.get_dummies()
+        with drop_first=True to avoid multicollinearity (the dummy variable trap):
+        Columns: Education, EmploymentType, MaritalStatus, LoanPurpose.
+   d. Feature Scaling (Standardization):
+      - Apply StandardScaler (Z-Score Normalization) to all continuous features:
+        z = (x - mean) / standard_deviation
+      - Result: Every numerical feature gets mean = 0 and standard deviation = 1.
+   e. Exploratory Data Analysis (EDA):
+      - Generate histograms to inspect distribution shapes (skewness).
+      - Compute correlation heatmaps to observe correlations with Default.
+      - Verify final class balance.
+
+4. DELIVERABLE:
+   A clean, encoded, and standardized dataset (e.g. Loan_default_processed.csv)
+   with zero missing values and consistent numerical scales.
+
+
+================================================================================
+TASK 3: MODEL CREATION (SCIKIT-LEARN & IMPLEMENTATION FROM SCRATCH)
+================================================================================
+
+1. OBJECTIVE:
+   Train an initial classification model using scikit-learn AND construct the
+   algorithm manually from scratch using pure NumPy to understand the math.
+
+2. WHY IT MATTERS:
+   Using library functions alone hides the mathematical mechanics. Implementing
+   from scratch guarantees full mastery of loss calculation, derivatives, and
+   gradient updates.
+
+3. STEP-BY-STEP INSTRUCTIONS:
+   a. Baseline Model Selection:
+      - Choose Logistic Regression:
+        * Pros: Extremely fast, fully interpretable coefficients, outputs
+          calibrated probabilities, and does not overfit easily on large data.
+        * Cons: Assumes a linear decision boundary.
+   b. Train-Test Split:
+      - Split the processed data into 80% Training set and 20% Testing set:
+        X_train, X_test, y_train, y_test = train_test_split(
+            X, y, test_size=0.2, random_state=42, stratify=y
+        )
+   c. Scikit-Learn Implementation:
+      - Instantiate LogisticRegression with class_weight='balanced' to handle
+        the ~11.6% class imbalance:
+        model = LogisticRegression(class_weight='balanced', max_iter=1000)
+        model.fit(X_train, y_train)
+   d. Scratch Implementation (Pure NumPy - No ML Libraries):
+      - Step 1: Weight Initialization
+        Initialize weight vector theta = zeros(n_features) and bias b = 0.
+      - Step 2: Sigmoid Activation Function
+        P(y=1|X) = 1 / (1 + exp(-z)), where z = X @ theta + b
+      - Step 3: Probability Prediction
+        Compute predicted probabilities for all m rows.
+      - Step 4: Binary Cross-Entropy Loss
+        Loss = -(1/m) * sum( y * log(y_pred) + (1 - y) * log(1 - y_pred) )
+      - Step 5: Gradient Computation & Weight Updates
+        gradient_w = (1/m) * (X.T @ (y_pred - y))
+        gradient_b = (1/m) * sum(y_pred - y)
+        theta = theta - learning_rate * gradient_w
+        b = b - learning_rate * gradient_b
+        Repeat for N iterations (e.g., 1000 epochs).
+      - Step 6: Prediction Function
+        If predicted probability >= 0.5 -> Predict 1 (Default), else 0.
+
+4. DELIVERABLE:
+   A serialized trained model artifact (model.pkl) and a custom Python class
+   (MyLogisticRegression) demonstrating pure mathematical implementation.
+
+
+================================================================================
+TASK 4: MODEL EVALUATION & DIAGNOSIS
+================================================================================
+
+1. OBJECTIVE:
+   Evaluate the baseline model on held-out test data using robust classification
+   metrics and diagnose whether it suffers from overfitting or underfitting.
+
+2. WHY IT MATTERS:
+   In imbalanced datasets, raw Accuracy is dangerously misleading. A model predicting
+   "No Default" every time would achieve 88% accuracy while being 100% useless
+   to a bank. We must inspect Precision, Recall, and F1-Score.
+
+3. STEP-BY-STEP INSTRUCTIONS:
+   a. Compute Key Classification Metrics:
+      - Confusion Matrix Components:
+        * TP (True Positive): Actual defaulters correctly caught by the model.
+        * TN (True Negative): Good borrowers correctly identified.
+        * FP (False Positive): Good borrower incorrectly flagged as defaulter (False Alarm).
+        * FN (False Negative): Defaulter missed by model (Bank loses loan money).
+      - Accuracy = (TP + TN) / Total
+        Overall correctness score.
+      - Precision = TP / (TP + FP)
+        Of all applicants predicted to default, what fraction actually defaulted?
+        High precision minimizes wrongful rejections of good customers.
+      - Recall (Sensitivity) = TP / (TP + FN)
+        Of all actual defaulters, what fraction did the model successfully catch?
+        High recall is critical for risk reduction.
+      - F1-Score = 2 * (Precision * Recall) / (Precision + Recall)
+        Harmonic mean balancing precision and recall. Best single metric for imbalanced data.
+   b. Feature Importance via Coefficients:
+      - Positive coefficients increase the odds of default (e.g. Higher InterestRate, DTIRatio).
+      - Negative coefficients decrease the odds of default (e.g. Higher Income, CreditScore).
+   c. Diagnose Model Fit (Train vs. Test Comparison):
+      - Overfitting: Train Accuracy >> Test Accuracy (Model memorized noise).
+      - Good Fit: Train Accuracy ≈ Test Accuracy and both are high.
+      - Underfitting: Both Train and Test Accuracy are mediocre/low.
+      - Project Diagnosis: Logistic Regression exhibits Underfitting (~67% accuracy)
+        because a linear boundary cannot capture complex non-linear financial patterns.
+        This provides the direct motivation for Task 5.
+
+4. DELIVERABLE:
+   A complete classification report with precision, recall, F1, confusion matrix,
+   and a written overfitting vs underfitting diagnosis.
+
+
+================================================================================
+TASK 5: ADVANCED MODELS, CROSS-VALIDATION & HYPERPARAMETER TUNING
+================================================================================
+
+1. OBJECTIVE:
+   Benchmark multiple non-linear and ensemble algorithms, eliminate split bias
+   using 5-Fold Cross-Validation, and tune the best model using GridSearchCV.
+
+2. WHY IT MATTERS:
+   A single train-test split can produce lucky or unlucky results. Cross-validation
+   proves stability, and hyperparameter tuning extracts peak performance from
+   complex models.
+
+3. STEP-BY-STEP INSTRUCTIONS:
+   a. Benchmark 5 Diverse Algorithms:
+      1. Logistic Regression: Linear statistical baseline.
+      2. Decision Tree: Tree-based flowchart splits. Interpretable but overfits easily.
+      3. Random Forest (Bagging): Builds hundreds of randomized trees in parallel and
+         takes majority vote. Drastically reduces overfitting and variance.
+      4. AdaBoost (Boosting): Sequentially builds shallow trees, giving higher weights
+         to samples misclassified by previous rounds.
+      5. Gradient Boosting (GBDT): Iteratively builds trees by fitting the pseudo-residuals
+         of prior trees via gradient descent.
+   b. 5-Fold Cross-Validation:
+      - Split the training data into 5 equal subsets (folds).
+      - Train on 4 folds, test on the 5th fold. Repeat 5 times so every fold acts
+        as the validation set once.
+      - Compute:
+        * 5-Fold CV Average: Mean score across all 5 runs.
+        * CV Spread (Standard Deviation): Low spread (e.g. ±0.003) proves the model
+          is consistent and stable regardless of data sample.
+   c. Model Selection:
+      - Compare all 5 models in a unified table (Train Acc, Test Acc, Precision,
+        Recall, F1, 5-Fold CV Avg, Fit Status).
+      - Select the top performer (Random Forest) based on highest CV score and stability.
+   d. Hyperparameter Tuning (GridSearchCV):
+      - Target Model: Random Forest
+      - Define Search Grid:
+        * n_estimators: [50, 100, 200] (Number of trees)
+        * max_depth: [None, 10, 20] (Tree depth limit)
+        * min_samples_split: [2, 5, 10]
+      - Execute GridSearchCV with cv=5.
+      - Extract best_params_ and test the tuned model on the held-out test set to
+        verify performance improvements over the baseline.
+
+4. DELIVERABLE:
+   An evaluation benchmark table comparing all 5 models, the chosen winner,
+   and optimal hyperparameters saved in evaluation.json / Week_5.ipynb.
+
+
+================================================================================
+TASK 6: VISUALIZATION OF METRICS & PERFORMANCE GRAPHS
+================================================================================
+
+1. OBJECTIVE:
+   Create intuitive, high-impact graphical visualizations of all performance
+   metrics to communicate model trade-offs, stability, and predictive behavior.
+
+2. WHY IT MATTERS:
+   Raw numerical tables are hard for stakeholders and non-technical managers
+   to interpret. Graphs instantly communicate which model is superior and why.
+
+3. STEP-BY-STEP INSTRUCTIONS:
+   a. Implement 6 Core Visualizations:
+      1. Side-by-Side Accuracy Comparison Bar Chart:
+         Visual comparison of Test Accuracy across Logistic Regression, Decision Tree,
+         Random Forest, AdaBoost, and Gradient Boosting.
+      2. Multi-Metric Comparison (Precision, Recall, F1-Score):
+         Grouped bar charts displaying how each model handles the trade-off
+         between catching defaults (Recall) and avoiding false rejections (Precision).
+      3. Confusion Matrix Heatmap:
+         Color-coded 2x2 grid displaying True Negatives, False Positives,
+         False Negatives, and True Positives.
+      4. ROC Curve & AUC Score Plot:
+         Plots True Positive Rate vs False Positive Rate across all probability
+         thresholds. The higher the Area Under the Curve (AUC closer to 1.0),
+         the better the model separates defaulters from non-defaulters.
+      5. Cross-Validation Score Distribution (Spread / Box Plot):
+         Visual representation of 5-Fold CV variance across models to prove stability.
+      6. Feature Importance Bar Chart:
+         Ranks the top features (e.g. CreditScore, Income, DTIRatio, InterestRate)
+         by their Gini importance or coefficient magnitude.
+   b. Dashboard & Web Integration:
+      - Embed dynamic charts into the web frontend interface (Task6.jsx)
+        consuming real-time metrics served by the Flask REST backend API.
+
+4. DELIVERABLE:
+   A visual reporting module or interactive dashboard with all 6 charts comparing
+   model performance and clearly identifying the optimal production model.
+
+
+================================================================================
+SUMMARY TABLE: COMPLETE 6-TASK PIPELINE
+================================================================================
+
+Task   | Phase                 | Core Actions                      | Key Tools / Techniques
+-------+-----------------------+-----------------------------------+-----------------------------------
+Task 1 | Problem Definition    | 255k rows, schema, imbalance check| Pandas, Data Dictionary
+Task 2 | Pre-processing        | Imputation, IQR clip, OHE, Scaling| Median/Mode, IQR, StandardScaler
+Task 3 | Model Creation        | LogReg (scikit-learn + scratch)   | Scikit-learn, NumPy Gradient Descent
+Task 4 | Model Evaluation      | Accuracy, Precision, Recall, F1   | Confusion Matrix, Diagnosis
+Task 5 | Advanced Models       | 5 Models, 5-Fold CV, GridSearchCV | Random Forest, GBDT, GridSearchCV
+Task 6 | Visualizations        | Bar, Radar, ROC, Heatmaps         | Matplotlib, Seaborn, React Charts
+
+================================================================================
+                                 END OF FILE
+================================================================================

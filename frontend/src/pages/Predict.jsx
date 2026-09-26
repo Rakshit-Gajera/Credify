@@ -181,9 +181,12 @@ export default function Predict() {
         resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
       );
     } catch (err) {
-      setError(
-        `${err.message}. Make sure the Flask server is running: python app.py inside the backend folder.`
-      );
+      const msg = err.message || 'An error occurred during prediction';
+      if (msg.includes('Failed to fetch') || msg.includes('NetworkError') || msg.includes('Load failed')) {
+        setError(`${msg}. Make sure the backend server is reachable.`);
+      } else {
+        setError(msg);
+      }
     } finally {
       setLoading(false);
     }
